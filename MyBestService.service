@@ -1,0 +1,15 @@
+[Unit]
+Description=Go-Service for LoggingService
+After=network.target
+Requires=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/LoggingService
+killSignal=SIGINT
+TimeoutStopSec=30
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

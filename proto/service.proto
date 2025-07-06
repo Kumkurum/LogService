@@ -1,0 +1,8 @@
+syntax = "proto3";
+option go_package = "transport.com/logging_service";
+
+import "message.proto";
+
+service LoggingService {
+  rpc Logging(LoggingRequest) returns (LoggingResponse);
+}

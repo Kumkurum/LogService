@@ -1,0 +1,28 @@
+syntax = "proto3";
+option go_package = "transport.com/logging_service";
+
+message LoggingRequest{
+ enum Level {
+   DEBUG = 0;
+   INFO = 1;
+   WARN = 2;
+   CRITICAL = 3;
+ }
+ Level level = 1;
+ string service_name = 2;
+ map<string, string> message = 3;
+}
+
+message LoggingResponse{
+  Error result = 1;
+}
+
+
+message Error {
+  enum ErrorCode {
+    NONE = 0;
+    ERROR = 1;
+    UNKNOWN_REQUEST = 2;
+  }
+  ErrorCode code = 1;
+}
