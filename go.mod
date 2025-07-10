@@ -1,4 +1,4 @@
-module LoggingService
+module LogService
 
 go 1.23
 
