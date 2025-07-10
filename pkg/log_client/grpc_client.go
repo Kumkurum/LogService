@@ -1,9 +1,9 @@
-package grpc_client
+package log_client
 
 import (
-	ls "LogService/internal/transport"
 	"context"
 	"fmt"
+	ls "github.com/Kumkurum/LogService/internal/transport"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/backoff"
 	"google.golang.org/grpc/credentials/insecure"

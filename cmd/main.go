@@ -1,10 +1,10 @@
 package main
 
 import (
-	"LogService/internal/grpc_service"
-	logging_service "LogService/internal/transport"
 	"flag"
 	"fmt"
+	"github.com/Kumkurum/LogService/internal/grpc_service"
+	logging_service "github.com/Kumkurum/LogService/internal/transport"
 	"google.golang.org/grpc"
 	"log"
 	"net"

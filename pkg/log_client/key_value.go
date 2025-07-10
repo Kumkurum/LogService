@@ -1,4 +1,4 @@
-package grpc_client
+package log_client
 
 type KeyValue struct {
 	Key   string
