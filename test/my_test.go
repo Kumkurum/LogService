@@ -1,8 +1,8 @@
 package test
 
 import (
-	logger "LoggingService/internal/grpc_client"
-	ls "LoggingService/internal/transport"
+	ls "LogService/internal/transport"
+	logger "LogService/pkg/grpc_client"
 	"context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"

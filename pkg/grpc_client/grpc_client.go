@@ -1,7 +1,7 @@
 package grpc_client
 
 import (
-	ls "LoggingService/internal/transport"
+	ls "LogService/internal/transport"
 	"context"
 	"fmt"
 	"google.golang.org/grpc"
