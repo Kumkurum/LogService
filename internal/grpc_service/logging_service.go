@@ -8,25 +8,30 @@ import (
 )
 
 type LoggingService struct {
-	sensorsStorage loggingservice.LoggingServiceServer
-	logFile        *lumberjack.Logger
-	logger         *slog.Logger
+	loggingservice.LoggingServiceServer
+	logFile *lumberjack.Logger
+	logger  *slog.Logger
 }
 
-func NewLoggingService(fileName string, maxSize int, isCompress bool) *LoggingService {
+func NewLoggingService(fileName string, maxSize, maxBackups int, isCompress bool) *LoggingService {
 	logFile := &lumberjack.Logger{
-		Filename: fileName, //"logs/server.log"
-		MaxSize:  maxSize,  // MB
-		Compress: isCompress,
+		Filename:   fileName, // Path
+		MaxSize:    maxSize,  // MB
+		MaxBackups: maxBackups,
+		Compress:   isCompress,
 	}
-	logger := slog.New(slog.NewJSONHandler(logFile, nil))
+	opts := &slog.HandlerOptions{
+		Level: slog.LevelDebug,
+	}
+	logger := slog.New(slog.NewJSONHandler(logFile, opts))
+
 	return &LoggingService{
 		logFile: logFile,
 		logger:  logger,
 	}
 }
 
-func (l *LoggingService) GetSensors(ctx context.Context, r *loggingservice.LoggingRequest) (*loggingservice.LoggingResponse, error) {
+func (ls *LoggingService) Logging(ctx context.Context, r *loggingservice.LoggingRequest) (*loggingservice.LoggingResponse, error) {
 
 	attrs := make([]slog.Attr, 0, len(r.Message)+1)
 	attrs = append(attrs, slog.String("service", r.ServiceName))
@@ -35,13 +40,13 @@ func (l *LoggingService) GetSensors(ctx context.Context, r *loggingservice.Loggi
 	}
 	switch r.Level {
 	case loggingservice.LoggingRequest_DEBUG:
-		l.logger.LogAttrs(ctx, slog.LevelDebug, r.ServiceName, attrs...)
+		ls.logger.LogAttrs(ctx, slog.LevelDebug, r.ServiceName, attrs...)
 	case loggingservice.LoggingRequest_INFO:
-		l.logger.LogAttrs(ctx, slog.LevelInfo, r.ServiceName, attrs...)
+		ls.logger.LogAttrs(ctx, slog.LevelInfo, r.ServiceName, attrs...)
 	case loggingservice.LoggingRequest_WARN:
-		l.logger.LogAttrs(ctx, slog.LevelWarn, r.ServiceName, attrs...)
+		ls.logger.LogAttrs(ctx, slog.LevelWarn, r.ServiceName, attrs...)
 	case loggingservice.LoggingRequest_CRITICAL:
-		l.logger.LogAttrs(ctx, slog.LevelError, r.ServiceName, attrs...)
+		ls.logger.LogAttrs(ctx, slog.LevelError, r.ServiceName, attrs...)
 	default:
 		return &loggingservice.LoggingResponse{
 			Result: &loggingservice.Error{Code: loggingservice.Error_ERROR},
@@ -50,4 +55,10 @@ func (l *LoggingService) GetSensors(ctx context.Context, r *loggingservice.Loggi
 	return &loggingservice.LoggingResponse{
 		Result: &loggingservice.Error{Code: loggingservice.Error_NONE},
 	}, nil
+}
+func (ls *LoggingService) LogAfterStart() {
+	ls.logger.Info("Logger start!")
+}
+func (ls *LoggingService) LogAfterEnd() {
+	ls.logger.Info("Logger end!")
 }
