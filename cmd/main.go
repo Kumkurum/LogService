@@ -1,8 +1,8 @@
 package main
 
 import (
-	"LoggingService/internal/grpc_service"
-	logging_service "LoggingService/internal/transport"
+	"LogService/internal/grpc_service"
+	logging_service "LogService/internal/transport"
 	"flag"
 	"fmt"
 	"google.golang.org/grpc"

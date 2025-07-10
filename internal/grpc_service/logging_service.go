@@ -1,7 +1,7 @@
 package grpc_service
 
 import (
-	loggingservice "LoggingService/internal/transport"
+	loggingservice "LogService/internal/transport"
 	"context"
 	"gopkg.in/natefinch/lumberjack.v2"
 	"log/slog"
