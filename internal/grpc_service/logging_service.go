@@ -2,9 +2,10 @@ package grpc_service
 
 import (
 	"context"
+	"log/slog"
+
 	loggingservice "github.com/Kumkurum/LogService/internal/transport"
 	"gopkg.in/natefinch/lumberjack.v2"
-	"log/slog"
 )
 
 type LoggingService struct {
@@ -34,7 +35,6 @@ func NewLoggingService(fileName string, maxSize, maxBackups int, isCompress bool
 func (ls *LoggingService) Logging(ctx context.Context, r *loggingservice.LoggingRequest) (*loggingservice.LoggingResponse, error) {
 
 	attrs := make([]slog.Attr, 0, len(r.Message)+1)
-	attrs = append(attrs, slog.String("service", r.ServiceName))
 	for k, v := range r.Message {
 		attrs = append(attrs, slog.String(k, v))
 	}
