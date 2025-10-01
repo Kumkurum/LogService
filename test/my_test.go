@@ -1,14 +1,15 @@
 package test
 
 import (
-	logger "LoggingService/internal/grpc_client"
-	ls "LoggingService/internal/transport"
 	"context"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
 	"log"
 	"testing"
 	"time"
+
+	ls "github.com/Kumkurum/LogService/internal/transport"
+	logger "github.com/Kumkurum/LogService/pkg/log_client"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 func TestLogger(t *testing.T) {

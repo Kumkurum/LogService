@@ -10,7 +10,7 @@ import (
 	"syscall"
 
 	"github.com/Kumkurum/LogService/internal/grpc_service"
-	logging_service "github.com/Kumkurum/LogService/internal/transport"
+	loggingservice "github.com/Kumkurum/LogService/internal/transport"
 	"google.golang.org/grpc"
 )
 
@@ -79,6 +79,6 @@ func main() {
 	loggingService.LogAfterStart()
 	defer loggingService.LogAfterEnd()
 
-	logging_service.RegisterLoggingServiceServer(s, loggingService)
+	loggingservice.RegisterLoggingServiceServer(s, loggingService)
 	_ = s.Serve(lis)
 }
