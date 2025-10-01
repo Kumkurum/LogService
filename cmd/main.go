@@ -1,10 +1,10 @@
 package main
 
 import (
+	"LoggingService/internal/grpc_service"
+	logging_service "LoggingService/internal/transport"
 	"flag"
 	"fmt"
-	"github.com/Kumkurum/LogService/internal/grpc_service"
-	logging_service "github.com/Kumkurum/LogService/internal/transport"
 	"google.golang.org/grpc"
 	"log"
 	"net"
@@ -19,7 +19,7 @@ func main() {
 	var fileName string
 	var isCompress bool
 	var maxSize, maxBackups int
-	flag.StringVar(&socketPath, "socketPath", "/tmp/grpc.sock", "address of grpc service, default: /tmp/grpc.sock")
+	flag.StringVar(&socketPath, "socketPath", "/tmp/logs.sock", "address of grpc service, default: /tmp/grpc.sock")
 	flag.BoolVar(&version, "version", false, "Version service")
 	flag.BoolVar(&help, "help", false, "Help how to use service")
 

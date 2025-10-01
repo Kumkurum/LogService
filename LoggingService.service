@@ -5,6 +5,7 @@ Requires=network.target
 
 [Service]
 Type=simple
+Slice=MicroServSwarm
 ExecStart=/usr/local/bin/LoggingService
 killSignal=SIGINT
 TimeoutStopSec=30

@@ -1,5 +1,5 @@
-//module LogService
 module github.com/Kumkurum/LogService
+
 go 1.23
 
 require (

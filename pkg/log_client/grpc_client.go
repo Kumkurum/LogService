@@ -1,9 +1,9 @@
 package log_client
 
 import (
+	ls "LoggingService/internal/transport"
 	"context"
 	"fmt"
-	ls "github.com/Kumkurum/LogService/internal/transport"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/backoff"
 	"google.golang.org/grpc/credentials/insecure"
@@ -49,7 +49,7 @@ func (lc *LoggingClient) Info(kvPairs ...KeyValue) (err error) {
 	if err := lc.isSocketAvailable(); err != nil {
 		return err
 	}
-	message := ConvertToMap(kvPairs...)
+	message := ConvertToMessage(kvPairs...)
 	response, err := lc.Logging(context.Background(), &ls.LoggingRequest{Level: ls.LoggingRequest_INFO, Message: message, ServiceName: lc.nameService})
 	if err != nil {
 		return fmt.Errorf("error in logging : %v", err)
@@ -64,7 +64,7 @@ func (lc *LoggingClient) Debug(kvPairs ...KeyValue) (err error) {
 	if err := lc.isSocketAvailable(); err != nil {
 		return err
 	}
-	message := ConvertToMap(kvPairs...)
+	message := ConvertToMessage(kvPairs...)
 	response, err := lc.Logging(context.Background(), &ls.LoggingRequest{Level: ls.LoggingRequest_DEBUG, Message: message, ServiceName: lc.nameService})
 	if err != nil {
 		return fmt.Errorf("error in logging : %v", err)
@@ -79,7 +79,7 @@ func (lc *LoggingClient) Warn(kvPairs ...KeyValue) (err error) {
 	if err := lc.isSocketAvailable(); err != nil {
 		return err
 	}
-	message := ConvertToMap(kvPairs...)
+	message := ConvertToMessage(kvPairs...)
 	response, err := lc.Logging(context.Background(), &ls.LoggingRequest{Level: ls.LoggingRequest_WARN, Message: message, ServiceName: lc.nameService})
 	if err != nil {
 		return fmt.Errorf("error in logging : %v", err)
@@ -94,7 +94,7 @@ func (lc *LoggingClient) Critical(kvPairs ...KeyValue) (err error) {
 	if err := lc.isSocketAvailable(); err != nil {
 		return err
 	}
-	message := ConvertToMap(kvPairs...)
+	message := ConvertToMessage(kvPairs...)
 	response, err := lc.Logging(context.Background(), &ls.LoggingRequest{Level: ls.LoggingRequest_CRITICAL, Message: message, ServiceName: lc.nameService})
 	if err != nil {
 		return fmt.Errorf("error in logging : %v", err)
