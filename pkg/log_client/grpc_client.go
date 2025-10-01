@@ -1,17 +1,18 @@
 package log_client
 
 import (
-	ls "LoggingService/internal/transport"
 	"context"
 	"fmt"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/backoff"
-	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/keepalive"
 	"log"
 	"os"
 	"sync"
 	"time"
+
+	ls "github.com/Kumkurum/LogService/internal/transport"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/backoff"
+	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/keepalive"
 )
 
 type LoggingClient struct {

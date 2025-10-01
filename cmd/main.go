@@ -1,16 +1,17 @@
 package main
 
 import (
-	"LoggingService/internal/grpc_service"
-	logging_service "LoggingService/internal/transport"
 	"flag"
 	"fmt"
-	"google.golang.org/grpc"
 	"log"
 	"net"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/Kumkurum/LogService/internal/grpc_service"
+	logging_service "github.com/Kumkurum/LogService/internal/transport"
+	"google.golang.org/grpc"
 )
 
 func main() {

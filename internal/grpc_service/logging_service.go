@@ -1,10 +1,11 @@
 package grpc_service
 
 import (
-	loggingservice "LoggingService/internal/transport"
 	"context"
-	"gopkg.in/natefinch/lumberjack.v2"
 	"log/slog"
+
+	loggingservice "github.com/Kumkurum/LogService/internal/transport"
+	"gopkg.in/natefinch/lumberjack.v2"
 )
 
 type LoggingService struct {
